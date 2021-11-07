@@ -15,9 +15,26 @@ class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 
-        int[] nums = new int[]{0,1,2,3};
-        int ans = solution.missingNumber(nums);
+        int[][] nums = new int[][]{{2, 2}, {3, 3}};
+        int ans = solution.maxCount(5,4,nums);
 
+
+    }
+
+    public int maxCount(int m, int n, int[][] ops) {
+
+        int ans = 0;
+        int m_min = m;
+        int n_min = n;
+        for (int []op : ops){
+            if ( op[0] < m_min){
+                m_min = op[0];
+            }
+            if ( op[1] < n_min){
+                n_min = op[1];
+            }
+        }
+        return m_min*n_min;
 
     }
 
