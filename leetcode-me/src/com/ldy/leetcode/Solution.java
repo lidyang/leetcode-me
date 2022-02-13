@@ -17,10 +17,97 @@ class Solution {
 //        int ans = solution.maxCount(5,4,nums);
 
 
-        int[][] nums = new int[][]{{0,0,0,0},{1,0,1,0},{0,1,1,0},{0,0,0,0}};
-        int ans = solution.numEnclaves(nums);
+//        int[][] nums = new int[][]{{0,0,0,0},{1,0,1,0},{0,1,1,0},{0,0,0,0}};
+//        int ans = solution.numEnclaves(nums);
+
+//        int ans = solution.countOperations(2,3);
+        int[] nums = new int[] {3,1,3,2,4,3};
+        int ans = solution.minimumOperations(nums);
+        System.out.println(ans);
         int i =0;
 
+
+
+
+    }
+
+    public long minimumRemoval(int[] beans) {
+        int ans = Integer.MAX_VALUE;
+        Arrays.sort(beans);
+        for(int i=beans.length-1;i>=0;i--){
+            int temp = 0;
+            for(int j=0;j<beans.length;j++){
+                if(beans[j]>=beans[i]) {
+                    temp += beans[j] - beans[i];
+                    if(temp > ans || temp<0){
+                        break;
+                    }
+                } else{
+                    temp += beans[j];
+                    if(temp > ans || temp<0){
+                        break;
+                    }
+                }
+            }
+            if(temp>=0 && temp<ans ){
+                ans =  temp;
+            }
+        }
+        return ans;
+
+    }
+
+    public int minimumOperations(int[] nums) {
+        Map<Integer, Integer> map1 = new HashMap<Integer, Integer>();
+        Map<Integer, Integer>map2 = new HashMap<Integer, Integer>();
+        int maxNum1 = 0;
+        int key1 =nums[0];
+        int key2 = nums[1];
+        int maxNum2 = 0;
+
+        for (int i=0;i<nums.length;i++){
+            if(i%2==0){
+                map1.put(nums[i], map1.getOrDefault(nums[i],0)+1);
+                if(map1.get(nums[i]) > maxNum1){
+                    maxNum1 = map1.get(nums[i]);
+                    key1=nums[i];
+                }
+            }else{
+                map2.put(nums[i], map2.getOrDefault(nums[i],0)+1);
+                if(map2.get(nums[i]) > maxNum2){
+                    maxNum2 = map2.get(nums[i]);
+                    key2 = nums[i];
+                }
+            }
+        }
+
+        int ans = 0;
+        if(key1 == key2){
+
+        }
+        else{
+            ans = nums.length-maxNum1-maxNum2;
+        }
+
+        return
+
+
+
+    }
+
+    public int countOperations(int num1, int num2) {
+
+        int ans = 0;
+        while (num1!=0 && num2!=0){
+            if(num1>num2){
+                num1 = num1-num2;
+                ans++;
+            } else{
+                num2=num2-num1;
+                ans++;
+            }
+        }
+        return ans;
 
     }
 
