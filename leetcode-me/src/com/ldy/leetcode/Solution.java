@@ -25,9 +25,102 @@ class Solution {
         int ans = solution.minimumOperations(nums);
         System.out.println(ans);
         int i =0;
+        "qsd".toCharArray()
 
 
 
+    }
+
+    public String repeatLimitedString(String s, int repeatLimit) {
+
+        int[]  count  = new int[26];
+        for(char c: s.toCharArray()){
+            count[c-'a']++;
+        }
+        int i = 25;
+        int c = 0;
+        StringBuilder sb = new StringBuilder();
+        while(true){
+            while(i >= 0 && count[i] == 0){
+                i--;
+            }
+            if(i < 0) {
+                break;
+            }
+            while(count[i]>0 && c < repeatLimit){
+                count[i]--;
+                c++;
+                sb.append((char)('a'+i));
+            }
+            c=0;
+            if(count[i] == 0){
+                continue;
+            }
+            else{
+                int j = i-1;
+                while(j>=0 && count[j] == 0){
+                    j--;
+                }
+                if(j<0) {
+                    break;
+                }
+                sb.append((char)('a'+j));
+                count[j]--;
+            }
+        }
+        return sb.toString();
+    }
+
+
+
+
+
+    public List<Long> maximumEvenSplit(long finalSum) {
+        List<Long> ans = new ArrayList();
+        if (finalSum % 2 == 0){
+            long now = 2;
+            while(finalSum >0){
+                if (finalSum < now){
+                    ans[ans.size()-1] += finalSum;
+                    break;
+                }else{
+                    ans.add(now);
+                    finalSum = finalSum - now;
+                    now =now+2;
+                }
+
+            }
+        }
+        return ans;
+
+    }
+
+
+    public long[] sumOfThree(long num) {
+        if(num%3 != 0){
+            return new long[]{};
+        }
+        long ans = num/3;
+//        long res[] =  new long[3];
+//        res = new long[]{ans - 1, ans, ans + 1};
+//        return res;
+
+        return  new long[]{ans - 1, ans, ans + 1};
+
+    }
+
+
+    public int countPairs(int[] nums, int k) {
+        int ans = 0;
+        int len = nums.length;
+        for (int i=0;i<len;i++){
+            for(int j=i+1;j<len;j++){
+                if((nums[i] == nums[j]) && i*j%k==0){
+                    ans++;
+                }
+            }
+        }
+        return ans;
 
     }
 
