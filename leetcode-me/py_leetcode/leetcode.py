@@ -17,10 +17,9 @@ def minWindow(s, t):
             if window[c] == need[c]:
                 valid=valid+1
         # print(right)
-        while valid == len(need):
-            if right-left < l:
-                start = left
-                l = right-left
+        while right-left >= len(t):
+            if valid == len(need):
+                return True
             d = s[left]
             left=left+1
             if need.__contains__(d):
@@ -28,10 +27,7 @@ def minWindow(s, t):
                     valid = valid-1
                 window[d] = window[d]-1
     
-    print(l)
-    print(start)
-    if l == 100001:return ""
-    else: return s[start:start+l]
+    return False
 
 
 res = minWindow("ADOBECODEBANC","ABC")
