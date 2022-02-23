@@ -11,18 +11,30 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+
+
+
 class Solution:
+
     def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:
-        if len(nums) == 0: return None
-        maxNum = 0
-        maxNumIndex = 0
-        for i in  range(len(nums)):
-            if nums[i] > maxNum:
-                maxNum = nums[i]
-                maxNumIndex = i
-        root = TreeNode(maxNum)
-        root.left = self.constructMaximumBinaryTree(nums[0:maxNumIndex])
-        root.right = self.constructMaximumBinaryTree(nums[maxNumIndex+1:len(nums)])
+        if len(nums) == 0: 
+            return None
+
+        max_num = nums[0]
+        max_index = 0
+        for i in range(len(nums)):
+            if nums[i] > max_num :
+                max_num = nums[i]
+                max_index = i
+
+        root = TreeNode(max_num)  
+        root.left = self.constructMaximumBinaryTree(nums[0:max_index])     
+        root.right = self.constructMaximumBinaryTree(nums[max_index+1:len(nums)])     
+        
+       
         return root
+
 # @lc code=end
 
