@@ -28,7 +28,7 @@ class RandomizedSet:
             return False
         self.map[val] = len(self.nums)
         self.nums.append(val)
-        print(self.nums)
+        # print(self.nums)
         return True
 
 
