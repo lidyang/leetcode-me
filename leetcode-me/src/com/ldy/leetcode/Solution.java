@@ -21,14 +21,95 @@ class Solution {
 //        int ans = solution.numEnclaves(nums);
 
 //        int ans = solution.countOperations(2,3);
-        int[] nums = new int[] {3,1,3,2,4,3};
-        int ans = solution.minimumOperations(nums);
-        System.out.println(ans);
-        int i =0;
-        "qsd".toCharArray()
+//        int[] nums = new int[] {2,2,1};
+//        int ans = solution.minimumOperations(nums);
+//        System.out.println(ans);
+//        int i =0;
+//        "qsd".toCharArray();
+//        [[2,2,1]]
+
+        int[][] nums = new int[][] {{2,2,1}};
+        solution.countLatticePoints(nums);
 
 
 
+
+
+
+
+    }
+
+    public List<Integer> intersection(int[][] nums) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        List<Integer> ans = new ArrayList<>();
+        int times = nums.length;
+        for(int[] num :nums){
+            for (int i : num){
+                map.put(i,map.getOrDefault(i,0));
+            }
+        }
+        for(int i : map.keySet()){
+            if (map.getOrDefault(i,0) == times){
+                ans.add(i);
+            }
+        }
+        ans.sort(Comparator.naturalOrder());
+        return ans;
+
+    }
+
+    class Point{
+        public int x;
+        public int y;
+
+        public  Point(int x,int y){
+            this.x=x;
+            this.y=y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Point point = (Point) o;
+            return x == point.x &&
+                    y == point.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+    }
+
+    public int countLatticePoints(int[][] circles) {
+        Set<Point> points = new HashSet<>();
+        for (int[] circle:circles){
+            int a = circle[0];
+            int b = circle[1];
+            int r = circle[2];
+            int left = a-r;
+            int right = a+r;
+
+            for (int i=left;i<=a;i++){
+                for(int j=0;j<=i-left;j++){
+                    Point p1 = new Point(i,b+j);
+                    Point p2 = new Point(i,b-j);
+                    points.add(p1);
+                    points.add(p2);
+                }
+            }
+            for (int i=right;i>a;i--){
+                for(int j=0;j<=right-i;j++){
+                    Point p1 = new Point(i,b+j);
+                    Point p2 = new Point(i,b-j);
+                    points.add(p1);
+                    points.add(p2);
+                }
+            }
+
+        }
+        return points.size();
     }
 
     public String repeatLimitedString(String s, int repeatLimit) {
@@ -75,13 +156,13 @@ class Solution {
 
 
 
-    public List<Long> maximumEvenSplit(long finalSum) {
-        List<Long> ans = new ArrayList();
+    public List<Long> maximumEvenSplit(Long finalSum) {
+        ArrayList<Long> ans = new ArrayList();
         if (finalSum % 2 == 0){
             long now = 2;
             while(finalSum >0){
                 if (finalSum < now){
-                    ans[ans.size()-1] += finalSum;
+//                    ans[ans.size()-1] += finalSum;
                     break;
                 }else{
                     ans.add(now);
@@ -182,7 +263,7 @@ class Solution {
             ans = nums.length-maxNum1-maxNum2;
         }
 
-        return
+        return ans;
 
 
 
